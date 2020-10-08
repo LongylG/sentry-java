@@ -1,0 +1,41 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.17.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenLocal()
+	maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+	maven { url 'https://repo.spring.io/milestone' }
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'io.sentry:sentry-log4j2:1.7.30'
+	implementation 'io.sentry:sentry-spring:1.7.30'
+	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+}
+
+configurations {
+	implementation.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+}
